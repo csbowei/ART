@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ART – Anchoring on Reality: Makeup Transfer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Lora:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css">
+  <link rel="stylesheet" href="assets/css/art.css">
+
+  <!-- Apply theme before render to prevent flash -->
+  <script>
+    (function(){
+      var m = localStorage.getItem('art-theme-mode') || 'dark';
+      if (m === 'light') document.documentElement.setAttribute('data-theme','light');
+    })();
+  </script>
+</head>
+
+<body>
+
+  <!-- Lightbox -->
+  <div id="lightbox" onclick="closeLightbox()">
+    <button id="lightboxClose" onclick="closeLightbox()">&#10005;</button>
+    <img id="lightboxImg" src="" alt="Enlarged view">
+  </div>
+
+  <div id="toastContainer"></div>
+
+
+  <!-- Top Navigation — CHANGE 3: nav-logo-badge "ART" div removed -->
+  <nav class="top-nav" id="topNav">
+    <div class="top-nav-inner">
+
+      <div class="top-nav-links">
+        <a href="#showcase"   class="nav-link" data-section="showcase">2K Showcase</a>
+        <a href="#sota"       class="nav-link" data-section="sota">SOTA</a>
+        <a href="#results"    class="nav-link" data-section="results">Results</a>
+        <a href="#abstract"   class="nav-link" data-section="abstract">Abstract</a>
+        <a href="#overview"   class="nav-link" data-section="overview">Method</a>
+        <a href="#dataset"    class="nav-link" data-section="dataset">Dataset</a>
+        <a href="#citation"   class="nav-link" data-section="citation">BibTeX</a>
+      </div>
+
+      <!-- Sun / Moon toggle -->
+      <div class="nav-theme-toggle">
+        <button class="nav-theme-btn" id="themeMoon" title="Dark mode" aria-label="Dark mode">
+          <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        </button>
+        <button class="nav-theme-btn" id="themeSun" title="Light mode" aria-label="Light mode">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+  <header class="hero">
+
+    <div class="hero-reel" aria-hidden="true">
+
+      <!-- Row 1 -->
+      <div class="reel-row">
+        <div class="reel-track reel-ltr" style="animation-duration:60s">
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/1.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/2.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/3.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/4.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/5.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/6.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/7.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/8.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/1.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/2.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/3.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/4.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/5.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/6.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/7.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/8.jpg" alt=""></div>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="reel-row">
+        <div class="reel-track reel-rtl" style="animation-duration:60s">
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/9.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/10.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/11.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/12.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/13.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/14.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/15.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/16.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/9.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/10.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/11.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/12.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/13.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/14.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/15.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/16.jpg" alt=""></div>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="reel-row">
+        <div class="reel-track reel-ltr reel-offset" style="animation-duration:60s">
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/17.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/18.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/19.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/20.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/21.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/22.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/23.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/24.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/17.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/18.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/19.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/20.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/21.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/22.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/23.jpg" alt=""></div>
+          <div class="reel-group"><img class="reel-img" src="assets/images/hero/24.jpg" alt=""></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="page-wrap hero-content">
+
+      <div class="pub-venue" style="display:none">
+        <span class="pub-venue-dot"></span>
+        ECCV 2026
+        <span class="pub-venue-dot"></span>
+      </div>
+
+      <h1 class="pub-title">
+        <span class="pub-title-line1">
+          <span class="title-accent">A</span>nchoring on <span class="title-accent">R</span>eality:
+        </span>
+        <span class="pub-title-line2">
+          Breaking the Pseudo-Target Ceiling in Makeup <span class="title-accent">T</span>ransfer
+        </span>
+      </h1>
+
+      <div class="authors-block">
+        <div class="authors-list">
+          <span class="author">Bo Wei<sup>1</sup></span><span class="authors-sep">,</span>
+          <span class="author">Xianhui Lin<sup>2&#8224;</sup></span><span class="authors-sep">,</span>
+          <span class="author">Yi Dong<sup>2</sup></span>
+        </div>
+        <div class="authors-list" style="margin-top:.28rem;">
+          <span class="author">Zhongzhong Li<sup>2</sup></span><span class="authors-sep">,</span>
+          <span class="author">Zonghui Li<sup>2</sup></span><span class="authors-sep">,</span>
+          <span class="author">Zirui Wang<sup>2</sup></span><span class="authors-sep">,</span>
+          <span class="author">Jiachen Yang<sup>2</sup></span>
+        </div>
+        <div class="authors-list" style="margin-top:.28rem;">
+          <span class="author">Xing Liu<sup>2</sup></span><span class="authors-sep">,</span>
+          <span class="author">Hong Gu<sup>2</sup></span><span class="authors-sep">,</span>
+          <span class="author">Xiaoming Li<sup>3</sup></span><span class="authors-sep">,</span>
+          <span class="author">Wangmeng Zuo<sup>1*</sup></span>
+        </div>
+        <div class="affiliations-list">
+          <span class="affil"><sup>1</sup>Harbin Institute of Technology</span>
+          <span class="affil"><sup>2</sup>BlueImage Lab, vivo Mobile Communication Co., Ltd</span>
+          <span class="affil"><sup>3</sup>Nanjing University</span>
+        </div>
+        <div class="corresp-note">&#8224; Project leader &nbsp;&nbsp; * Corresponding author</div>
+      </div>
+
+      <div class="links-row">
+        <a href="#" class="link-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414A1 1 0 0119 9.414V19a2 2 0 01-2 2z"/></svg>
+          Paper
+        </a>
+        <a href="#" class="link-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          Model
+        </a>
+        <a href="#" class="link-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+          Code
+        </a>
+        <a href="#" class="link-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          Dataset
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- 2K Visual Showcase -->
+    <section class="sec" id="showcase" style="padding-top:5.5rem;">
+      <div class="page-wrap">
+        <p class="section-label reveal">2K Makeup Transfer Visual Showcase</p>
+        <p class="section-title reveal reveal-d1">High-Fidelity Makeup Transfer at 2K Resolution</p>
+        <p class="prose reveal reveal-d1" style="margin-bottom:.5rem; text-align:left;">Our framework enables high-fidelity makeup transfer at up to 2K resolution. ART faithfully transfers complex artistic styles and high-frequency cosmetic details while strictly preserving the original source identity and underlying facial geometry.</p>
+        <p class="hint reveal reveal-d2" style="justify-content:center;"><svg viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Drag the center slider to compare. Click side cards or arrows to navigate.</p>
+      </div>
+
+      <!-- CHANGE 1: Active card scale increased to 1.15 in art.js (ACTIVE_SCALE = 1.15) and stage height raised to 690px in art.css -->
+      <div class="carousel3d-scene reveal reveal-d2" id="carousel3d">
+
+        <button class="c3d-btn c3d-prev" id="c3dPrev" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="c3d-btn c3d-next" id="c3dNext" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 6 15 12 9 18"/></svg>
+        </button>
+
+        <div class="c3d-stage" id="c3dStage">
+
+          <!-- Card 1 (was 2) -->
+          <div class="c3d-card" data-index="0">
+            <div class="compare-group">
+              <div class="group-thumbs">
+                <div class="group-thumb"><img src="assets/images/2k/2_source.jpg" alt="Source"><div class="group-thumb-label">Source</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/2k/2_source.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+                <div class="group-thumb"><img src="assets/images/2k/2_ref.jpg" alt="Reference"><div class="group-thumb-label">Ref</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/2k/2_ref.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+              </div>
+              <div class="group-main-slider"><span class="sol sol-left">Source</span><span class="sol sol-right">Ours (2K)</span><img-comparison-slider><figure slot="first" style="margin:0;"><img src="assets/images/2k/2_source.jpg" alt="Source"></figure><figure slot="second" style="margin:0;"><img src="assets/images/2k/2_gen.jpg" alt="Ours"></figure></img-comparison-slider></div>
+            </div>
+          </div>
+
+          <!-- Card 2 (was 3) -->
+          <div class="c3d-card" data-index="1">
+            <div class="compare-group">
+              <div class="group-thumbs">
+                <div class="group-thumb"><img src="assets/images/2k/3_source.jpg" alt="Source"><div class="group-thumb-label">Source</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/2k/3_source.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+                <div class="group-thumb"><img src="assets/images/2k/3_ref.jpg" alt="Reference"><div class="group-thumb-label">Ref</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/2k/3_ref.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+              </div>
+              <div class="group-main-slider"><span class="sol sol-left">Source</span><span class="sol sol-right">Ours (2K)</span><img-comparison-slider><figure slot="first" style="margin:0;"><img src="assets/images/2k/3_source.jpg" alt="Source"></figure><figure slot="second" style="margin:0;"><img src="assets/images/2k/3_gen.jpg" alt="Ours"></figure></img-comparison-slider></div>
+            </div>
+          </div>
+
+          <!-- Card 3 (was 4) -->
+          <div class="c3d-card" data-index="2">
+            <div class="compare-group">
+              <div class="group-thumbs">
+                <div class="group-thumb"><img src="assets/images/2k/4_source.jpg" alt="Source"><div class="group-thumb-label">Source</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/2k/4_source.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+                <div class="group-thumb"><img src="assets/images/2k/4_ref.jpg" alt="Reference"><div class="group-thumb-label">Ref</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/2k/4_ref.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+              </div>
+              <div class="group-main-slider"><span class="sol sol-left">Source</span><span class="sol sol-right">Ours (2K)</span><img-comparison-slider><figure slot="first" style="margin:0;"><img src="assets/images/2k/4_source.jpg" alt="Source"></figure><figure slot="second" style="margin:0;"><img src="assets/images/2k/4_gen.jpg" alt="Ours"></figure></img-comparison-slider></div>
+            </div>
+          </div>
+
+          <!-- Card 4 (was 5) -->
+          <div class="c3d-card" data-index="3">
+            <div class="compare-group">
+              <div class="group-thumbs">
+                <div class="group-thumb"><img src="assets/images/2k/5_source.jpg" alt="Source"><div class="group-thumb-label">Source</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/2k/5_source.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+                <div class="group-thumb"><img src="assets/images/2k/5_ref.jpg" alt="Reference"><div class="group-thumb-label">Ref</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/2k/5_ref.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+              </div>
+              <div class="group-main-slider"><span class="sol sol-left">Source</span><span class="sol sol-right">Ours (2K)</span><img-comparison-slider><figure slot="first" style="margin:0;"><img src="assets/images/2k/5_source.jpg" alt="Source"></figure><figure slot="second" style="margin:0;"><img src="assets/images/2k/5_gen.jpg" alt="Ours"></figure></img-comparison-slider></div>
+            </div>
+          </div>
+
+          <!-- Card 5 (was 6) -->
+          <div class="c3d-card" data-index="4">
+            <div class="compare-group">
+              <div class="group-thumbs">
+                <div class="group-thumb"><img src="assets/images/2k/6_source.jpg" alt="Source"><div class="group-thumb-label">Source</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/2k/6_source.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+                <div class="group-thumb"><img src="assets/images/2k/6_ref.jpg" alt="Reference"><div class="group-thumb-label">Ref</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/2k/6_ref.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+              </div>
+              <div class="group-main-slider"><span class="sol sol-left">Source</span><span class="sol sol-right">Ours (2K)</span><img-comparison-slider><figure slot="first" style="margin:0;"><img src="assets/images/2k/6_source.jpg" alt="Source"></figure><figure slot="second" style="margin:0;"><img src="assets/images/2k/6_gen.jpg" alt="Ours"></figure></img-comparison-slider></div>
+            </div>
+          </div>
+
+          <!-- Card 6 (was 1) -->
+          <div class="c3d-card" data-index="5">
+            <div class="compare-group">
+              <div class="group-thumbs">
+                <div class="group-thumb"><img src="assets/images/2k/1_source.jpg" alt="Source"><div class="group-thumb-label">Source</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/2k/1_source.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+                <div class="group-thumb"><img src="assets/images/2k/1_ref.jpg" alt="Reference"><div class="group-thumb-label">Ref</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/2k/1_ref.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+              </div>
+              <div class="group-main-slider"><span class="sol sol-left">Source</span><span class="sol sol-right">Ours (2K)</span><img-comparison-slider><figure slot="first" style="margin:0;"><img src="assets/images/2k/1_source.jpg" alt="Source"></figure><figure slot="second" style="margin:0;"><img src="assets/images/2k/1_gen.jpg" alt="Ours"></figure></img-comparison-slider></div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="c3d-dots" id="c3dDots"></div>
+
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- SOTA Comparison -->
+    <section class="sec" id="sota" style="padding-top:2rem;">
+      <div class="page-wrap">
+        <p class="section-label reveal">SOTA Comparison</p>
+        <p class="section-title reveal reveal-d1">How We Compare Against Prior Work</p>
+        <p class="hint reveal reveal-d1" style="justify-content:center;"><svg viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Select a source&#8211;reference pair, then click a method card to compare it against ours in the slider.</p>
+
+        <div class="sota-pair-row reveal reveal-d1">
+          <div class="sota-pair-item active" data-index="0" data-source="assets/images/compare/1_source.jpg" onclick="sotaSelectPair(this)"><div class="sota-pair-imgs"><div class="sota-pair-thumb"><img src="assets/images/compare/1_source.jpg" alt="Source"><div class="group-thumb-label">Source</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/compare/1_source.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div><div class="sota-pair-thumb"><img src="assets/images/compare/1_ref.jpg" alt="Ref"><div class="group-thumb-label">Ref</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/compare/1_ref.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div></div><div class="sota-pair-name">Pair 1</div></div>
+          <div class="sota-pair-item" data-index="1" data-source="assets/images/compare/2_source.jpg" onclick="sotaSelectPair(this)"><div class="sota-pair-imgs"><div class="sota-pair-thumb"><img src="assets/images/compare/2_source.jpg" alt="Source"><div class="group-thumb-label">Source</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/compare/2_source.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div><div class="sota-pair-thumb"><img src="assets/images/compare/2_ref.jpg" alt="Ref"><div class="group-thumb-label">Ref</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/compare/2_ref.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div></div><div class="sota-pair-name">Pair 2</div></div>
+          <div class="sota-pair-item" data-index="2" data-source="assets/images/compare/3_source.jpg" onclick="sotaSelectPair(this)"><div class="sota-pair-imgs"><div class="sota-pair-thumb"><img src="assets/images/compare/3_source.jpg" alt="Source"><div class="group-thumb-label">Source</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/compare/3_source.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div><div class="sota-pair-thumb"><img src="assets/images/compare/3_ref.jpg" alt="Ref"><div class="group-thumb-label">Ref</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/compare/3_ref.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div></div><div class="sota-pair-name">Pair 3</div></div>
+          <div class="sota-pair-item" data-index="3" data-source="assets/images/compare/4_source.jpg" onclick="sotaSelectPair(this)"><div class="sota-pair-imgs"><div class="sota-pair-thumb"><img src="assets/images/compare/4_source.jpg" alt="Source"><div class="group-thumb-label">Source</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/compare/4_source.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div><div class="sota-pair-thumb"><img src="assets/images/compare/4_ref.jpg" alt="Ref"><div class="group-thumb-label">Ref</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/compare/4_ref.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div></div><div class="sota-pair-name">Pair 4</div></div>
+          <div class="sota-pair-item" data-index="4" data-source="assets/images/compare/5_source.jpg" onclick="sotaSelectPair(this)"><div class="sota-pair-imgs"><div class="sota-pair-thumb"><img src="assets/images/compare/5_source.jpg" alt="Source"><div class="group-thumb-label">Source</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/compare/5_source.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div><div class="sota-pair-thumb"><img src="assets/images/compare/5_ref.jpg" alt="Ref"><div class="group-thumb-label">Ref</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/compare/5_ref.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div></div><div class="sota-pair-name">Pair 5</div></div>
+          <div class="sota-pair-item" data-index="5" data-source="assets/images/compare/6_source.jpg" onclick="sotaSelectPair(this)"><div class="sota-pair-imgs"><div class="sota-pair-thumb"><img src="assets/images/compare/6_source.jpg" alt="Source"><div class="group-thumb-label">Source</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/compare/6_source.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div><div class="sota-pair-thumb"><img src="assets/images/compare/6_ref.jpg" alt="Ref"><div class="group-thumb-label">Ref</div><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/compare/6_ref.jpg')" aria-label="Enlarge"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div></div><div class="sota-pair-name">Pair 6</div></div>
+        </div>
+
+        <div class="sota-body reveal reveal-d2">
+          <div class="sota-slider-wrap">
+            <span class="sol sol-left">Source</span><span class="sol sol-right" id="sotaRightLabel">Ours</span>
+            <img-comparison-slider><figure slot="first" style="margin:0;"><img id="sotaSliderLeft" src="assets/images/compare/1_source.jpg" alt="Source"></figure><figure slot="second" style="margin:0;"><img id="sotaSliderRight" src="assets/images/compare/Ours/1.jpg" alt="Method result"></figure></img-comparison-slider>
+          </div>
+          <div class="sota-method-grid">
+            <div class="sota-method-item active" data-label="Ours" data-p0="assets/images/compare/Ours/1.jpg" data-p1="assets/images/compare/Ours/2.jpg" data-p2="assets/images/compare/Ours/3.jpg" data-p3="assets/images/compare/Ours/4.jpg" data-p4="assets/images/compare/Ours/5.jpg" data-p5="assets/images/compare/Ours/6.jpg" onclick="sotaSelectMethod(this)"><img src="assets/images/compare/Ours/1.jpg" alt="Ours"><div class="sota-method-label" style="background:rgba(109,40,217,.82);">Ours</div></div>
+            <div class="sota-method-item" data-label="Nano Banana Pro" data-p0="assets/images/compare/Banana/1.jpg" data-p1="assets/images/compare/Banana/2.jpg" data-p2="assets/images/compare/Banana/3.jpg" data-p3="assets/images/compare/Banana/4.jpg" data-p4="assets/images/compare/Banana/5.jpg" data-p5="assets/images/compare/Banana/6.jpg" onclick="sotaSelectMethod(this)"><img src="assets/images/compare/Banana/1.jpg" alt="Nano Banana Pro"><div class="sota-method-label">Nano Banana Pro</div></div>
+            <div class="sota-method-item" data-label="GPT Image 1.5" data-p0="assets/images/compare/GPT/1.jpg" data-p1="assets/images/compare/GPT/2.jpg" data-p2="assets/images/compare/GPT/3.jpg" data-p3="assets/images/compare/GPT/4.jpg" data-p4="assets/images/compare/GPT/5.jpg" data-p5="assets/images/compare/GPT/6.jpg" onclick="sotaSelectMethod(this)"><img src="assets/images/compare/GPT/1.jpg" alt="GPT Image 1.5"><div class="sota-method-label">GPT Image 1.5</div></div>
+            <div class="sota-method-item" data-label="StableMakeup" data-p0="assets/images/compare/StableMakeup/1.jpg" data-p1="assets/images/compare/StableMakeup/2.jpg" data-p2="assets/images/compare/StableMakeup/3.jpg" data-p3="assets/images/compare/StableMakeup/4.jpg" data-p4="assets/images/compare/StableMakeup/5.jpg" data-p5="assets/images/compare/StableMakeup/6.jpg" onclick="sotaSelectMethod(this)"><img src="assets/images/compare/StableMakeup/1.jpg" alt="StableMakeup"><div class="sota-method-label">StableMakeup</div></div>
+            <div class="sota-method-item" data-label="SHMT" data-p0="assets/images/compare/SHMT/1.jpg" data-p1="assets/images/compare/SHMT/2.jpg" data-p2="assets/images/compare/SHMT/3.jpg" data-p3="assets/images/compare/SHMT/4.jpg" data-p4="assets/images/compare/SHMT/5.jpg" data-p5="assets/images/compare/SHMT/6.jpg" onclick="sotaSelectMethod(this)"><img src="assets/images/compare/SHMT/1.jpg" alt="SHMT"><div class="sota-method-label">SHMT</div></div>
+            <div class="sota-method-item" data-label="MAD" data-p0="assets/images/compare/MAD/1.jpg" data-p1="assets/images/compare/MAD/2.jpg" data-p2="assets/images/compare/MAD/3.jpg" data-p3="assets/images/compare/MAD/4.jpg" data-p4="assets/images/compare/MAD/5.jpg" data-p5="assets/images/compare/MAD/6.jpg" onclick="sotaSelectMethod(this)"><img src="assets/images/compare/MAD/1.jpg" alt="MAD"><div class="sota-method-label">MAD</div></div>
+            <div class="sota-method-item" data-label="EleGANt" data-p0="assets/images/compare/EleGANt/1.jpg" data-p1="assets/images/compare/EleGANt/2.jpg" data-p2="assets/images/compare/EleGANt/3.jpg" data-p3="assets/images/compare/EleGANt/4.jpg" data-p4="assets/images/compare/EleGANt/5.jpg" data-p5="assets/images/compare/EleGANt/6.jpg" onclick="sotaSelectMethod(this)"><img src="assets/images/compare/EleGANt/1.jpg" alt="EleGANt"><div class="sota-method-label">EleGANt</div></div>
+            <div class="sota-method-item" data-label="PSGAN" data-p0="assets/images/compare/PSGAN/1.jpg" data-p1="assets/images/compare/PSGAN/2.jpg" data-p2="assets/images/compare/PSGAN/3.jpg" data-p3="assets/images/compare/PSGAN/4.jpg" data-p4="assets/images/compare/PSGAN/5.jpg" data-p5="assets/images/compare/PSGAN/6.jpg" onclick="sotaSelectMethod(this)"><img src="assets/images/compare/PSGAN/1.jpg" alt="PSGAN"><div class="sota-method-label">PSGAN</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- More Visual Results -->
+    <section class="sec" id="results">
+      <div class="page-wrap">
+        <p class="section-label reveal">More Visual Results</p>
+        <p class="section-title reveal reveal-d1">Mix &amp; Match Any Source and Reference</p>
+        <p class="hint reveal reveal-d1" style="justify-content:center;"><svg viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Pick any <strong>Source</strong> and any <strong>Reference</strong> independently to see different combination effects.</p>
+        <div class="results-body reveal reveal-d1">
+          <div class="results-col" id="resultsSrcCol">
+            <div class="results-col-header">Source</div>
+            <div class="results-col-item active" data-src-idx="1" onclick="resultsSelectSrc(this)"><img src="assets/images/more_visual/source_1.jpg" alt="Source 1"><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/more_visual/source_1.jpg')"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+            <div class="results-col-item" data-src-idx="2" onclick="resultsSelectSrc(this)"><img src="assets/images/more_visual/source_2.jpg" alt="Source 2"><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/more_visual/source_2.jpg')"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+            <div class="results-col-item" data-src-idx="3" onclick="resultsSelectSrc(this)"><img src="assets/images/more_visual/source_3.jpg" alt="Source 3"><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/more_visual/source_3.jpg')"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+            <div class="results-col-item" data-src-idx="4" onclick="resultsSelectSrc(this)"><img src="assets/images/more_visual/source_4.jpg" alt="Source 4"><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/more_visual/source_4.jpg')"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+          </div>
+          <div class="results-col" id="resultsRefCol">
+            <div class="results-col-header">Ref</div>
+            <div class="results-col-item active" data-ref-idx="1" onclick="resultsSelectRef(this)"><img src="assets/images/more_visual/ref_1.jpg" alt="Ref 1"><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/more_visual/ref_1.jpg')"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+            <div class="results-col-item" data-ref-idx="2" onclick="resultsSelectRef(this)"><img src="assets/images/more_visual/ref_2.jpg" alt="Ref 2"><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/more_visual/ref_2.jpg')"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+            <div class="results-col-item" data-ref-idx="3" onclick="resultsSelectRef(this)"><img src="assets/images/more_visual/ref_3.jpg" alt="Ref 3"><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/more_visual/ref_3.jpg')"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+            <div class="results-col-item" data-ref-idx="4" onclick="resultsSelectRef(this)"><img src="assets/images/more_visual/ref_4.jpg" alt="Ref 4"><button class="thumb-zoom-btn" onclick="event.stopPropagation();openLightbox('assets/images/more_visual/ref_4.jpg')"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+          </div>
+          <div class="results-slider-wrap">
+            <span class="sol sol-left">Source</span><span class="sol sol-right">Ours</span>
+            <img-comparison-slider><figure slot="first" style="margin:0;"><img id="resultsLeft" src="assets/images/more_visual/source_1.jpg" alt="Source"></figure><figure slot="second" style="margin:0;"><img id="resultsRight" src="assets/images/more_visual/generate_1_1.jpg" alt="Ours"></figure></img-comparison-slider>
+            <div class="results-no-result" id="resultsNoResult"><svg style="width:32px;height:32px;stroke:var(--subtle);fill:none;stroke-width:1.5;" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="3" x2="21" y2="21"/></svg><span>No result for this combination</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- Abstract -->
+    <section class="sec" id="abstract">
+      <div class="page-wrap">
+        <p class="section-label reveal">Abstract</p>
+        <p class="section-title reveal reveal-d1">What is ART?</p>
+
+        <div class="abstract-card reveal reveal-d2">
+          <div class="abstract-quote-mark">"</div>
+          <div class="abstract-prose">
+            <p>
+              Existing makeup transfer methods rely on pseudo-target supervision generated by a teacher model,
+              creating a performance ceiling bounded by the teacher's quality. We propose <strong>ART</strong>
+              (Anchoring on Reality), a two-stage framework that breaks this ceiling by anchoring a refinement
+              cycle directly to real reference images, effectively overriding pseudo-target artifacts.
+            </p>
+            <p>
+              To support high-fidelity evaluation,
+              we introduce <strong>MakeupFaces2K (MF2K)</strong>, the first 2K-resolution in-the-wild makeup
+              dataset with 8,573 images spanning diverse styles and demographics.
+            </p>
+            <p>
+              Comprehensive experiments demonstrate state-of-the-art visual fidelity with faithful identity preservation
+              across varying makeup intensities, even under heavy occlusions, extreme expressions, and cross-ethnicity scenarios.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- Method Overview -->
+    <section class="sec" id="overview">
+      <div class="page-wrap">
+        <p class="section-label reveal">Method Overview</p>
+        <p class="section-title reveal reveal-d1">The ART Pipeline</p>
+        <div class="overview-img-wrap reveal reveal-d1"><img src="assets/images/method/pipeline.png" alt="ART method pipeline"></div>
+        <div class="overview-points reveal reveal-d2">
+          <div class="overview-point"><span class="point-badge">1</span><span><strong>Reality-Anchored Refinement:</strong> By anchoring a refinement cycle to the real reference, our model effectively overrides pseudo-target artifacts while stabilizing training via a controlled-noise bottleneck.</span></div>
+          <div class="overview-point"><span class="point-badge">2</span><span><strong>2K-Resolution In-the-Wild Makeup Dataset:</strong> We introduce MakeupFaces2K (MF2K), the first 2K-resolution makeup portrait dataset featuring 8,573 images across diverse makeup intensities and underrepresented demographics.</span></div>
+          <div class="overview-point"><span class="point-badge">3</span><span><strong>State-of-the-Art Performance:</strong> Our method achieves superior visual fidelity and consistently preserves fine-grained details and source identity, even under occlusions and extreme expressions.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- MF2K Dataset -->
+    <section class="sec" id="dataset">
+      <div class="page-wrap">
+        <p class="section-label reveal">MF2K Dataset</p>
+        <p class="section-title reveal reveal-d1">The First 2K Makeup Portrait Dataset</p>
+        <div class="dataset-hero-wrap reveal reveal-d1"><img src="assets/images/dataset/MF2K.jpg" alt="MF2K Dataset Overview"></div>
+        <p class="prose reveal reveal-d1" style="margin-bottom:1.2rem; text-align:left;">To facilitate research in high-fidelity synthesis, we introduce <strong>MakeupFaces2K (MF2K)</strong>, the first 2K-resolution in-the-wild makeup dataset comprising <strong>8,573 images</strong> at 2048&#215;2048 resolution. MF2K covers diverse makeup intensities including bare skin (3,139), light makeup (2,063), heavy makeup (1,798), and artistic styles (1,573), and improves coverage of male portraits and complex high-frequency patterns.</p>
+        <p class="hint reveal reveal-d2" style="justify-content:center;"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Hover over any sample below to magnify fine-grained cosmetic details.</p>
+        <div class="dataset-grid reveal reveal-d2">
+          <div class="magnifier-wrap"><img src="assets/images/dataset/5.jpg" alt="Sample 05"><div class="magnifier-lens"><canvas></canvas></div></div>
+          <div class="magnifier-wrap"><img src="assets/images/dataset/6.jpg" alt="Sample 06"><div class="magnifier-lens"><canvas></canvas></div></div>
+          <div class="magnifier-wrap"><img src="assets/images/dataset/7.jpg" alt="Sample 07"><div class="magnifier-lens"><canvas></canvas></div></div>
+          <div class="magnifier-wrap"><img src="assets/images/dataset/8.jpg" alt="Sample 08"><div class="magnifier-lens"><canvas></canvas></div></div>
+          <div class="magnifier-wrap"><img src="assets/images/dataset/1.jpg" alt="Sample 01"><div class="magnifier-lens"><canvas></canvas></div></div>
+          <div class="magnifier-wrap"><img src="assets/images/dataset/2.jpg" alt="Sample 02"><div class="magnifier-lens"><canvas></canvas></div></div>
+          <div class="magnifier-wrap"><img src="assets/images/dataset/3.jpg" alt="Sample 03"><div class="magnifier-lens"><canvas></canvas></div></div>
+          <div class="magnifier-wrap"><img src="assets/images/dataset/4.jpg" alt="Sample 04"><div class="magnifier-lens"><canvas></canvas></div></div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- BibTeX — CHANGE 2: copy button now sits inside .bibtex-pre-wrap (relative container), pinned top-right -->
+    <section class="sec" id="citation">
+      <div class="page-wrap">
+        <p class="section-label reveal">BibTeX</p>
+        <p class="section-title reveal reveal-d1">Cite This Work</p>
+        <div class="bibtex-block reveal reveal-d1">
+          <div class="bibtex-pre-wrap">
+            <button class="bibtex-copy-btn" id="bibtexCopyBtn" onclick="copyBibtex()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              Copy
+            </button>
+            <pre class="bibtex-pre" id="bibtexContent">@inproceedings{
+  title     = {},
+  author    = {},
+  booktitle = {},
+  year      = {}
+}</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>
+      This website is adapted from the
+      <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener">Nerfies</a>
+      project page. We thank the authors for open-sourcing their template.
+    </p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+  <script src="assets/js/art.js"></script>
+</body>
+</html>
