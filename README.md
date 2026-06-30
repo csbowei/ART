@@ -1,19 +1,19 @@
 <div align='center'>
 <h1 align="center">[ECCV 2026] Anchoring on Reality: Breaking the Pseudo-Target Ceiling in Makeup Transfer</h1>
-    <strong>Bo Wei</strong><sup> 1</sup>&emsp;
-    <a href='https://scholar.google.com/citations?user=wLTXeNwAAAAJ&hl=en&oi=ao' target='_blank'><strong>Xianhui Lin</strong></a><sup> 2†</sup>&emsp;
-    <strong>Yi Dong</strong><sup> 2</sup>&emsp;
-    <strong>Zhongzhong Li</strong><sup> 2</sup>&emsp;
-    <strong>Zonghui Li</strong><sup> 2</sup>&emsp;
-    <a href='https://scholar.google.com/citations?hl=en&user=BhmLztgAAAAJ' target='_blank'><strong>Zirui Wang</strong></a><sup> 2</sup>&emsp;
+    Bo Wei<sup> 1</sup>&emsp;
+    <a href='https://scholar.google.com/citations?user=wLTXeNwAAAAJ&hl=en&oi=ao' target='_blank'>Xianhui Lin</a><sup> 2†</sup>&emsp;
+    Yi Dong<sup> 2</sup>&emsp;
+    Zhongzhong Li<sup> 2</sup>&emsp;
+    Zonghui Li<sup> 2</sup>&emsp;
+    <a href='https://scholar.google.com/citations?hl=en&user=BhmLztgAAAAJ' target='_blank'>Zirui Wang</a><sup> 2</sup>&emsp;
 </div>
 
 <div align='center'>
-    <a href='https://scholar.google.com/citations?hl=en&user=12MzNVkAAAAJ' target='_blank'><strong>Jiachen Yang</strong></a><sup> 2</sup>&emsp;
-    <strong>Xing Liu</strong><sup> 2</sup>&emsp;
-    <strong>Hong Gu</strong><sup> 2</sup>&emsp;
-    <a href='https://scholar.google.com/citations?hl=en&user=tmT_voUAAAAJ' target='_blank'><strong>Xiaoming Li</strong></a><sup> 3*</sup>&emsp;
-    <a href='https://scholar.google.com/citations?hl=en&user=rUOpCEYAAAAJ' target='_blank'><strong>Wangmeng Zuo</strong></a><sup> 1*</sup>
+    <a href='https://scholar.google.com/citations?hl=en&user=12MzNVkAAAAJ' target='_blank'>Jiachen Yang</a><sup> 2</sup>&emsp;
+    Xing Liu<sup> 2</sup>&emsp;
+    Hong Gu<sup> 2</sup>&emsp;
+    <a href='https://scholar.google.com/citations?hl=en&user=tmT_voUAAAAJ' target='_blank'>Xiaoming Li</a><sup> 3*</sup>&emsp;
+    <a href='https://scholar.google.com/citations?hl=en&user=rUOpCEYAAAAJ' target='_blank'>Wangmeng Zuo</a><sup> 1*</sup>
 </div>
 
 <div align='center'>
@@ -37,6 +37,8 @@
   </p>
 </div>
 
+## 🔍 Overview
+
 <div align="center">
 <img src="./assets/teaser.png" width="100%">
 </div>
@@ -50,7 +52,7 @@
 **Figure 2. Method overview.**
 ART is a two-stage framework that shifts supervision from the synthetic pseudo-target to the real reference.
 **Stage I** performs pseudo-target initialization by training the transfer model for global makeup placement and an auxiliary makeup remover for bare-skin extraction.
-**Stage II** predicts a differentiable makeup carrier $\hat{z}$ at noise level $\sigma_{\mathrm{tr}}$, and then reconstructs the real reference from its bare-skin counterpart conditioned on $\hat{z}$. Since $\hat{z}$ remains differentiable, the gradient of $\mathcal{L}_{\mathrm{refine}}$ back-propagates into the transfer prediction, helping recover fine-grained makeup cues and suppress synthetic artifacts, while $\mathcal{L}_{\mathrm{bottleneck}}$ preserves the global structure.
+**Stage II** predicts a differentiable makeup carrier ẑ at noise level σ<sub>tr</sub>, and then reconstructs the real reference from its bare-skin counterpart conditioned on ẑ. Since ẑ remains differentiable, the gradient of L<sub>refine</sub> back-propagates into the transfer prediction, helping recover fine-grained makeup cues and suppress synthetic artifacts, while L<sub>bottleneck</sub> preserves the global structure.
 
 
 ## ✨ Highlights
