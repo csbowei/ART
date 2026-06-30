@@ -1,0 +1,20 @@
+torch>=2.1
+torchvision
+diffusers>=0.34.0
+transformers>=4.41
+peft>=0.11
+safetensors
+numpy
+Pillow
+
+# Training only
+accelerate>=0.30
+albumentations>=1.4
+opencv-python
+pytorch-wavelets
+PyWavelets
+lpips
+prodigyopt
+tqdm
+tensorboard
+wandb
