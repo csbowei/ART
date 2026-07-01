@@ -29,7 +29,7 @@
 
 <div align="center">
   <p>
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/arXiv-ART-red" alt="arXiv link"></a>&nbsp;
+    <a href="https://arxiv.org/abs/2606.31089" target="_blank"><img src="https://img.shields.io/badge/arXiv-ART-red" alt="arXiv link"></a>&nbsp;
     <a href="https://csbowei.github.io/ART/" target="_blank"><img src="https://img.shields.io/badge/Project-Homepage-green" alt="project homepage"></a>&nbsp;
     <a href="https://huggingface.co/csbowei/ART" target="_blank"><img src="https://img.shields.io/badge/🤗 Hugging Face-Models-blue" alt="HF Models"></a>&nbsp;
     <!-- <a href="" target="_blank"><img src="https://img.shields.io/badge/Dataset-MF2K-purple" alt="Dataset"></a>&nbsp;  -->
@@ -181,6 +181,11 @@ We are also grateful to previous makeup transfer works and datasets, including [
 
 If you find our work or code useful for your research, please cite:
 
-```latex
-Citation will be updated soon.
+```bibtex
+@article{wei2026art,
+  title={Anchoring on Reality: Breaking the Pseudo-Target Ceiling in Makeup Transfer},
+  author={Wei, Bo and Lin, Xianhui and Dong, Yi and Li, Zhongzhong and Li, Zonghui and Wang, Zirui and Yang, Jiachen and Liu, Xing and Gu, Hong and Li, Xiaoming and Zuo, Wangmeng},
+  journal={arXiv preprint arXiv:2606.31089},
+  year={2026}
+}
 ```
