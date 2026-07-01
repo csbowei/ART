@@ -1,6 +1,6 @@
 <div align='center'>
 <h1 align="center">[ECCV 2026] Anchoring on Reality: Breaking the Pseudo-Target Ceiling in Makeup Transfer</h1>
-    Bo Wei<sup> 1</sup>&emsp;
+    Bo Wei<sup> 1*</sup>&emsp;
     <a href='https://scholar.google.com/citations?user=wLTXeNwAAAAJ&hl=en&oi=ao' target='_blank'>Xianhui Lin</a><sup> 2†</sup>&emsp;
     Yi Dong<sup> 2</sup>&emsp;
     Zhongzhong Li<sup> 2</sup>&emsp;
@@ -12,19 +12,19 @@
     <a href='https://scholar.google.com/citations?hl=en&user=12MzNVkAAAAJ' target='_blank'>Jiachen Yang</a><sup> 2</sup>&emsp;
     Xing Liu<sup> 2</sup>&emsp;
     Hong Gu<sup> 2</sup>&emsp;
-    <a href='https://scholar.google.com/citations?hl=en&user=tmT_voUAAAAJ' target='_blank'>Xiaoming Li</a><sup> 3*</sup>&emsp;
-    <a href='https://scholar.google.com/citations?hl=en&user=rUOpCEYAAAAJ' target='_blank'>Wangmeng Zuo</a><sup> 1*</sup>
+    <a href='https://scholar.google.com/citations?hl=en&user=tmT_voUAAAAJ' target='_blank'>Xiaoming Li</a><sup> 3✉</sup>&emsp;
+    <a href='https://scholar.google.com/citations?hl=en&user=rUOpCEYAAAAJ' target='_blank'>Wangmeng Zuo</a><sup> 1✉</sup>
 </div>
 
 <div align='center'>
     <sup>1 </sup>Harbin Institute of Technology&emsp;
-    <sup>2 </sup>vivo BlueImage Lab, vivo Mobile Communication Co., Ltd&emsp;
+    <sup>2 </sup>vivo BlueImage Lab&emsp;
     <sup>3 </sup>Nanjing University
 </div>
 
 <div align='center'>
-    <small><sup>†</sup> Project lead</small>&emsp;
-    <small><sup>*</sup> Corresponding author</small>
+    <small><sup>*</sup> Work done during an internship at vivo.</small>&emsp;
+    <small><sup>†</sup> Project lead</small>
 </div>
 
 <div align="center">
@@ -65,19 +65,19 @@ ART is a two-stage framework that shifts supervision from the synthetic pseudo-t
 
 
 ## 🗓️ Plan & Updates
-The model weights and dataset will be released **as soon as possible** after internal review.
+Higher-resolution model weights and the dataset will be released **as soon as possible** after internal review.
 
 **Plan：**
 - [x] Inference code
-- [ ] 512×512 LoRA weights
+- [x] 512×512 LoRA weights
 - [ ] Higher-resolution weights
 - [ ] Training code
 - [ ] MF2K dataset
 
 
 **Updates：**
+- **`2026/07/01`**: We released the 512×512 LoRA weights.
 - **`2026/06/30`**: We released the inference code. Continuous updates, stay tuned!
-
 
 ## 🚀 Getting Started
 
@@ -92,11 +92,22 @@ conda activate art
 pip install -r ./requirements.txt
 ```
 
-### 📦 2. Pretrained Weights
+### 📦 2. Download Pretrained Weights
+
+[Download](https://huggingface.co/csbowei/ART) the ART LoRA checkpoints and place them under `./checkpoints/`, or use the following command:
+
+```bash
+# pip install -U "huggingface_hub[cli]"
+
+# If Hugging Face is not directly accessible, you can use hf-mirror:
+# export HF_ENDPOINT=https://hf-mirror.com
+
+hf download csbowei/ART --local-dir ./checkpoints --include "*.safetensors"
+```
 
 | Model | Link |
 | :--- | :--- |
-| ART LoRA | pending internal review |
+| ART LoRA | [csbowei/ART](https://huggingface.co/csbowei/ART) |
 | FLUX.1-Kontext-dev | [black-forest-labs/FLUX.1-Kontext-dev](https://huggingface.co/black-forest-labs/FLUX.1-Kontext-dev) |
 
 ### ▶️ 3. Usage
@@ -107,8 +118,7 @@ python infer.py \
     --task        mt \
     --input       ./examples/source/src_001.jpg \
     --ref         ./examples/ref/ref_001.jpg \
-    --model_path  /path/to/FLUX.1-Kontext-dev \
-    --lora_path   /path/to/ART_transfer_lora_512.safetensors \
+    --lora_path   ./checkpoints/art_transfer_lora_512.safetensors \
     --resolution  512 \
     --output_dir  ./examples/outputs \
     --save_concat
@@ -119,8 +129,7 @@ python infer.py \
 python infer.py \
     --task        demakeup \
     --input       ./examples/ref/ref_002.jpg \
-    --model_path  /path/to/FLUX.1-Kontext-dev \
-    --lora_path   /path/to/ART_demakeup_lora_512.safetensors \
+    --lora_path   ./checkpoints/art_demakeup_lora_512.safetensors \
     --resolution  512 \
     --output_dir  ./examples/outputs \
     --save_concat
