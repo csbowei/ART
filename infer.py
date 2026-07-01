@@ -1,21 +1,5 @@
 """
 Inference script for ART: runs makeup transfer (mt) or makeup removal (demakeup).
-
-Usage:
-    # Makeup transfer: apply ref makeup style onto input face
-    python infer.py \
-        --task mt \
-        --input ./examples/source/src_001.jpg \
-        --ref ./examples/ref/ref_001.jpg \
-        --model_path path/to/model
-        --lora_path path/to/model
-
-    # Makeup removal: strip makeup from input face
-    python infer.py \
-        --task demakeup \
-        --input ./examples/ref/ref_001.jpg \
-        --model_path path/to/model
-        --lora_path path/to/model
 """
 
 import argparse
@@ -42,7 +26,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--prompt", type=str, default=None, help="Override the default task prompt.")
     parser.add_argument("--input", type=str, required=True, help="Input face image path.")
     parser.add_argument("--ref", type=str, default=None, help="Reference makeup image (required for --task mt).")
-    parser.add_argument("--model_path", type=str, required=True, help="Path or HF ID of the model.")
+    parser.add_argument("--model_path", type=str, default="black-forest-labs/FLUX.1-Kontext-dev")
     parser.add_argument("--lora_path", type=str, default="", help="LoRA weights path (optional).")
     parser.add_argument("--revision", type=str, default=None)
     parser.add_argument("--variant", type=str, default=None)
