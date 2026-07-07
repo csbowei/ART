@@ -70,12 +70,14 @@ Higher-resolution model weights and the dataset will be released **as soon as po
 **Plan：**
 - [x] Inference code
 - [x] 512×512 LoRA weights
+- [x] 1024×1024 LoRA weights
 - [ ] Higher-resolution weights
 - [ ] Training code
 - [ ] MF2K dataset
 
 
 **Updates：**
+- **`2026/07/07`**: We released the 1024×1024 LoRA weights.
 - **`2026/07/01`**: We released the 512×512 LoRA weights.
 - **`2026/06/30`**: We released the inference code. Continuous updates, stay tuned!
 
@@ -118,8 +120,8 @@ python infer.py \
     --task        mt \
     --input       ./examples/source/src_001.jpg \
     --ref         ./examples/ref/ref_001.jpg \
-    --lora_path   ./checkpoints/art_transfer_lora_512.safetensors \
-    --resolution  512 \
+    --lora_path   ./checkpoints/art_transfer_lora_1024.safetensors \
+    --resolution  1024 \
     --output_dir  ./examples/outputs \
     --save_concat
 ```
@@ -129,8 +131,8 @@ python infer.py \
 python infer.py \
     --task        demakeup \
     --input       ./examples/ref/ref_002.jpg \
-    --lora_path   ./checkpoints/art_demakeup_lora_512.safetensors \
-    --resolution  512 \
+    --lora_path   ./checkpoints/art_demakeup_lora_1024.safetensors \
+    --resolution  1024 \
     --output_dir  ./examples/outputs \
     --save_concat
 ```
