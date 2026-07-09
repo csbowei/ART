@@ -78,6 +78,7 @@ Higher-resolution model weights and training code will be released **as soon as 
 
 
 **Updates：**
+- **`2026/07/09`**: We released an interactive Gradio app and added more example images.
 - **`2026/07/07`**: We released the MF2K dataset.
 - **`2026/07/07`**: We released the 1024×1024 LoRA weights.
 - **`2026/07/01`**: We released the 512×512 LoRA weights.
@@ -155,6 +156,14 @@ The generated results should look similar to the following:
 </div>
 
 > The `--resolution` parameter should match the resolution of the LoRA model. `--save_concat` creates a side-by-side concatenated image of the input and output.
+
+Or you can launch the interactive Gradio app:
+
+```bash
+python app.py
+```
+
+After launching, open the local URL shown in the terminal. The app automatically lists examples from `./examples/source/` and `./examples/ref/`.
 
 
 ## 📊 Datasets
