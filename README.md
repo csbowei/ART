@@ -32,6 +32,7 @@
     <a href="https://arxiv.org/abs/2606.31089" target="_blank"><img src="https://img.shields.io/badge/arXiv-ART-red" alt="arXiv link"></a>&nbsp;
     <a href="https://csbowei.github.io/ART/" target="_blank"><img src="https://img.shields.io/badge/Project-Homepage-green" alt="project homepage"></a>&nbsp;
     <a href="https://huggingface.co/csbowei/ART" target="_blank"><img src="https://img.shields.io/badge/🤗 Hugging Face-Models-blue" alt="HF Models"></a>&nbsp;
+    <a href="https://huggingface.co/spaces/csbowei/ART-Makeup-Transfer" target="_blank"><img src="https://img.shields.io/badge/🤗 Hugging Face-Space-orange" alt="HF Space"></a>&nbsp;
     <a href="https://drive.google.com/drive/folders/1UfUUAk86fWWzYsZcGOzpTmAWa32IwK21?usp=drive_link" target="_blank"><img src="https://img.shields.io/badge/Dataset-MF2K-purple?logo=googledrive&logoColor=white" alt="MF2K Dataset"></a>&nbsp;
     <!-- <a href="" target="_blank"><img src="https://img.shields.io/github/stars/csbowei/ART?style=social" alt="GitHub stars"></a> -->
   </p>
@@ -78,6 +79,7 @@ Higher-resolution model weights and training code will be released **as soon as 
 
 
 **Updates：**
+- **`2026/07/09`**: We launched the [Hugging Face Space demo](https://huggingface.co/spaces/csbowei/ART-Makeup-Transfer). Try ART online!
 - **`2026/07/09`**: We released an interactive Gradio app and added more example images.
 - **`2026/07/07`**: We released the MF2K dataset.
 - **`2026/07/07`**: We released the 1024×1024 LoRA weights.
