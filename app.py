@@ -20,8 +20,10 @@ PROMPT = "Apply makeup transfer"
 SEED = 42
 PANEL_MIN_WIDTH = 260
 PANEL_MAX_WIDTH = 340
-EXAMPLE_COLUMNS = 3
+RESULT_PANEL_MAX_WIDTH = 350
+EXAMPLE_COLUMNS = 4
 EXAMPLE_GAP = 8
+EXAMPLE_ROW_GAP = 8
 LOCAL_PROXY_BYPASS = ("localhost", "127.0.0.1", "0.0.0.0", "::1")
 
 
@@ -45,7 +47,6 @@ ALL_RESOLUTIONS = sorted([*CHECKPOINTS, *DISABLED_CHECKPOINTS])
 
 SOURCE_EXAMPLES = sorted((ROOT / "examples" / "source").glob("*"))
 REFERENCE_EXAMPLES = sorted((ROOT / "examples" / "ref").glob("*"))
-EMPTY_RESULT = Image.new("RGB", (512, 512), (39, 39, 42))
 
 
 def _ensure_local_proxy_bypass() -> None:
@@ -92,7 +93,7 @@ def transfer_makeup(
     source_image: Image.Image | None,
     reference_image: Image.Image | None,
     resolution: int | str,
-) -> Image.Image:
+) -> tuple[Image.Image, Image.Image]:
     if source_image is None:
         raise gr.Error("Please upload or select a source image.")
     if reference_image is None:
@@ -111,7 +112,7 @@ def transfer_makeup(
     generator = torch.Generator(device="cuda").manual_seed(SEED)
 
     with torch.inference_mode(), autocast(device_type="cuda", dtype=torch.bfloat16):
-        return pipe(
+        result = pipe(
             image=source,
             cond=reference,
             prompt=PROMPT,
@@ -121,6 +122,7 @@ def transfer_makeup(
             num_inference_steps=config.steps,
             generator=generator,
         ).images[0]
+    return source, result
 
 
 def open_example(paths: list[Path], evt: gr.SelectData) -> str:
@@ -142,20 +144,15 @@ def example_columns(paths: list[Path]) -> int:
     return max(1, min(EXAMPLE_COLUMNS, len(paths)))
 
 
-def example_rows(paths: list[Path]) -> int:
-    columns = example_columns(paths)
-    return max(1, (len(paths) + columns - 1) // columns)
-
-
 CSS = f"""
 .gradio-container {{
-    max-width: 1120px !important;
+    max-width: 1220px !important;
     margin: 0 auto !important;
     padding: 28px 28px 32px !important;
 }}
 
 .hero {{
-    max-width: 1056px;
+    max-width: 1164px;
     margin: 0 auto 30px;
     padding-bottom: 0;
     border-bottom: 0;
@@ -168,16 +165,34 @@ CSS = f"""
     font-size: clamp(28px, 3.1vw, 40px);
     line-height: 1.18;
     letter-spacing: 0;
+    position: relative;
+    isolation: isolate;
+}}
+
+.hero h1::after {{
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    width: min(680px, 72vw);
+    height: 28px;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: linear-gradient(to right, rgb(198, 255, 221), rgb(251, 215, 134), rgb(247, 121, 125));
+    opacity: 0;
+    filter: blur(22px);
+    z-index: -1;
 }}
 
 .title-lead {{
     display: block;
     font-size: 1em;
     font-weight: 820;
-    color: transparent;
-    background: linear-gradient(90deg, #ffffff 0%, #fff1e4 42%, #ff9a3d 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
+    color: transparent !important;
+    background-image: linear-gradient(90deg, #ffffff 0%, #ffd9c4 45%, #ff7a18 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
 }}
 
 .title-tail {{
@@ -185,10 +200,11 @@ CSS = f"""
     margin-top: 4px;
     font-size: 0.64em;
     font-weight: 680;
-    color: transparent;
-    background: linear-gradient(90deg, #f4f4f5 0%, #d7d2cc 58%, #ffb36a 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
+    color: transparent !important;
+    background-image: linear-gradient(90deg, #f8fafc 0%, #f0d7e7 55%, #ffb36a 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
 }}
 
 .hero-note {{
@@ -196,6 +212,40 @@ CSS = f"""
     color: var(--body-text-color-subdued);
     font-size: 13px;
     line-height: 1.45;
+}}
+
+@media (prefers-color-scheme: light) {{
+    .hero h1::after {{
+        opacity: 0.28;
+    }}
+
+    .title-lead {{
+        color: transparent !important;
+        background-image: linear-gradient(
+            to right,
+            color-mix(in srgb, rgb(198, 255, 221) 52%, var(--body-text-color)),
+            color-mix(in srgb, rgb(251, 215, 134) 66%, var(--body-text-color)),
+            color-mix(in srgb, rgb(247, 121, 125) 82%, var(--body-text-color))
+        ) !important;
+        -webkit-background-clip: text !important;
+        background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        text-shadow: none !important;
+    }}
+
+    .title-tail {{
+        color: transparent !important;
+        background-image: linear-gradient(
+            to right,
+            color-mix(in srgb, rgb(198, 255, 221) 58%, var(--body-text-color)),
+            color-mix(in srgb, rgb(251, 215, 134) 62%, var(--body-text-color)),
+            color-mix(in srgb, rgb(247, 121, 125) 72%, var(--body-text-color))
+        ) !important;
+        -webkit-background-clip: text !important;
+        background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        text-shadow: none !important;
+    }}
 }}
 
 .badge-row {{
@@ -261,6 +311,11 @@ CSS = f"""
     gap: 8px !important;
 }}
 
+.result-panel {{
+    flex: 1.24 1 {PANEL_MAX_WIDTH}px !important;
+    max-width: {RESULT_PANEL_MAX_WIDTH}px !important;
+}}
+
 .panel-title {{
     display: flex;
     align-items: center;
@@ -295,7 +350,58 @@ CSS = f"""
     border-radius: 8px !important;
 }}
 
+.result-stage {{
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    aspect-ratio: 1 / 1 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    border: 1px solid var(--border-color-primary) !important;
+    border-radius: 8px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}}
+
+.result-stage .result-stage {{
+    border: 0 !important;
+}}
+
+#result-comparison {{
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+    z-index: 1;
+}}
+
+#result-comparison .wrap,
+#result-comparison .image-container,
+#result-comparison .slider-wrap {{
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}}
+
+#result-comparison img {{ object-fit: cover !important; }}
+
 .example-gallery {{
+    --example-thumb-radius: 8px;
     width: 100% !important;
     height: auto !important;
     min-height: 0 !important;
@@ -305,6 +411,7 @@ CSS = f"""
 }}
 
 .example-gallery > div,
+.example-gallery .fixed-height,
 .example-gallery .grid-wrap,
 .example-gallery .grid-container {{
     height: auto !important;
@@ -314,7 +421,11 @@ CSS = f"""
 }}
 
 .example-gallery .grid-container {{
-    gap: {EXAMPLE_GAP}px !important;
+    column-gap: {EXAMPLE_GAP}px !important;
+    row-gap: {EXAMPLE_ROW_GAP}px !important;
+    grid-template-rows: none !important;
+    grid-auto-rows: max-content !important;
+    align-content: start !important;
 }}
 
 .example-gallery .grid-container,
@@ -328,14 +439,70 @@ CSS = f"""
     aspect-ratio: 1 / 1 !important;
     height: auto !important;
     min-height: 0 !important;
-    border-radius: 6px !important;
+    padding: 0 !important;
+    border-radius: var(--example-thumb-radius) !important;
     overflow: hidden !important;
+    background: transparent !important;
+    box-sizing: border-box !important;
+    line-height: 0 !important;
 }}
 
 .example-gallery img {{
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
+    display: block !important;
+    border-radius: calc(var(--example-thumb-radius) - 2px) !important;
+}}
+
+.example-gallery .thumbnail-item *,
+.example-gallery .thumbnail-lg *,
+.example-gallery button * {{
+    border-radius: calc(var(--example-thumb-radius) - 2px) !important;
+    overflow: hidden !important;
+}}
+
+.example-gallery .thumbnail-item,
+.example-gallery .thumbnail-lg {{
+    position: relative;
+    z-index: 0;
+    transform-origin: var(--hover-origin-x, 50%) var(--hover-origin-y, 50%);
+    transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}}
+
+.example-gallery .grid-container {{
+    isolation: isolate;
+}}
+
+.example-gallery .grid-container > :nth-child(4n + 1),
+.example-gallery .grid-container > :nth-child(4n + 2) {{
+    --hover-origin-x: 0%;
+}}
+
+.example-gallery .grid-container > :nth-child(4n + 3),
+.example-gallery .grid-container > :nth-child(4n) {{
+    --hover-origin-x: 100%;
+}}
+
+.example-gallery .grid-container > :nth-child(-n + 4) {{
+    --hover-origin-y: 0%;
+}}
+
+.example-gallery .grid-container > :nth-child(n + 9) {{
+    --hover-origin-y: 100%;
+}}
+
+.example-gallery .grid-container > :hover {{
+    position: relative;
+    z-index: 3;
+}}
+
+.example-gallery .thumbnail-item:hover,
+.example-gallery .thumbnail-lg:hover {{
+    z-index: 3;
+    transform: scale(1.4);
+    border-color: var(--color-accent) !important;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.5) !important;
 }}
 
 #generate-button {{
@@ -500,7 +667,6 @@ with gr.Blocks(title="ART Makeup Transfer") as demo:
                     value=[str(path) for path in SOURCE_EXAMPLES],
                     label="Source examples",
                     columns=example_columns(SOURCE_EXAMPLES),
-                    rows=example_rows(SOURCE_EXAMPLES),
                     object_fit="cover",
                     allow_preview=False,
                     buttons=[],
@@ -528,7 +694,6 @@ with gr.Blocks(title="ART Makeup Transfer") as demo:
                     value=[str(path) for path in REFERENCE_EXAMPLES],
                     label="Reference examples",
                     columns=example_columns(REFERENCE_EXAMPLES),
-                    rows=example_rows(REFERENCE_EXAMPLES),
                     object_fit="cover",
                     allow_preview=False,
                     buttons=[],
@@ -542,20 +707,23 @@ with gr.Blocks(title="ART Makeup Transfer") as demo:
 
         with gr.Column(scale=1, min_width=PANEL_MIN_WIDTH, elem_classes=["panel-col", "result-panel"]):
             gr.HTML('<div class="panel-title">Result</div>')
-            result = gr.Image(
-                value=EMPTY_RESULT,
-                show_label=False,
-                type="pil",
-                format="png",
-                buttons=["download", "fullscreen"],
-                interactive=False,
-                elem_classes="image-box",
-            )
+            with gr.Group(elem_classes="result-stage"):
+                comparison = gr.ImageSlider(
+                    value=None,
+                    type="pil",
+                    format="png",
+                    show_label=False,
+                    buttons=[],
+                    container=False,
+                    slider_position=50,
+                    elem_id="result-comparison",
+                    elem_classes="result-slider",
+                )
             with gr.Column(elem_classes="resolution-card"):
                 gr.HTML('<div class="panel-title">Resolution</div>')
                 resolution = gr.Radio(
                     choices=[str(r) for r in ALL_RESOLUTIONS],
-                    value=str(min(CHECKPOINTS)),
+                    value=str(min(ALL_RESOLUTIONS)),
                     label=None,
                     show_label=False,
                     container=False,
@@ -570,7 +738,7 @@ with gr.Blocks(title="ART Makeup Transfer") as demo:
     generate.click(
         fn=transfer_makeup,
         inputs=[source, reference, resolution],
-        outputs=result,
+        outputs=comparison,
         api_name="transfer",
         concurrency_limit=1,
     )
