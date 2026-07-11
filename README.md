@@ -41,6 +41,10 @@
 ## 🔍 Overview
 
 <div align="center">
+<img src="./assets/example_gif.gif" width="100%">
+</div>
+
+<div align="center">
 <img src="./assets/teaser.png" width="100%">
 </div>
 
