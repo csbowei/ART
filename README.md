@@ -40,9 +40,10 @@
 
 ## 🔍 Overview
 
-<div align="center">
-<img src="./assets/example_gif.gif" width="100%">
-</div>
+<p align="center">
+  <img src="./assets/gif_case_1.gif" width="49%" alt="ART example 1">
+  <img src="./assets/gif_case_2.gif" width="49%" alt="ART example 2">
+</p>
 
 <div align="center">
 <img src="./assets/teaser.png" width="100%">
@@ -70,14 +71,13 @@ ART is a two-stage framework that shifts supervision from the synthetic pseudo-t
 
 
 ## 🗓️ Plan & Updates
-Higher-resolution model weights and training code will be released **as soon as possible** after internal review.
 
 **Plan：**
 
 - [x] Inference code
 - [x] 512×512 LoRA weights
 - [x] 1024×1024 LoRA weights
-- [ ] Higher-resolution weights
+- [ ] Higher-resolution weights *(not planned for the current release)*
 - [ ] Training code
 - [x] MF2K dataset
 
